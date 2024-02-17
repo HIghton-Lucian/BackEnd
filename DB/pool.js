@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 require("dotenv").config();
 
-
+// 테이블이름 dream : 꿈 추천
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -9,40 +9,14 @@ const pool = new Pool({
   password: process.env.DB_PW,
   port: 5432,
 });
-
-// async function get_diary() {
-//     const client = await pool.connect();
-//     const result = await client.query('SELECT * FROM diary;');
-//     client.release();
-//     return result.rows;
-// }
-  
-// async function add_diary(text, path) {
-//     const client = await pool.connect();
-//     const query = 'INSERT INTO diary (text, image_path) VALUES ($1, $2)';
-//     const values = [text, path];
-//     await client.query(query, values);
-//     client.release();
-//     return true;
-// }
-  
-// async function del_diary(a) {
-//     const client = await pool.connect();
-//     const query = ``;
-//     const values = [a];
-//     await client.query(query, values);
-//     client.release();
-//     return true;
-// }
-
-
+// 조회
 async function get_dream() {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM dream;');
     client.release();
     return result.rows;
 }
-  
+// 추가
 async function add_dream(title, content, writer) {
     const client = await pool.connect();
     const query = 'INSERT INTO dream (title, content, writer) VALUES ($1, $2, $3)';
@@ -50,7 +24,7 @@ async function add_dream(title, content, writer) {
     await client.query(query, values);
     client.release();
 }
-  
+// 추가
 async function del_dream(title, writer) {
     const client = await pool.connect();
     const query = 'DELETE FROM dream WHERE title = $1 AND writer = $2';
