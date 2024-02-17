@@ -37,7 +37,7 @@ router.post("/text_gpt", async (req, res) => {
 router.post("/img_gpt", async (req, res) => {
     const img = req.body.text;
     const result = await img_gpt(img);
-    res.json({imgurl : result});
+    res.json({img_url : result});
 });
 
 module.exports = router;
